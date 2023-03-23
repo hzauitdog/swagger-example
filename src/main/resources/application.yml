@@ -2,4 +2,10 @@ spring:
   mvc:
     pathmatch:
       matching-strategy: ant_path_matcher
+    format:
+      date: yyyy-MM-dd
+      time: HH:mm:ss
+      date-time: yyyy-MM-dd HH:mm:ss
+  jackson:
+    time-zone: GMT+8
 
