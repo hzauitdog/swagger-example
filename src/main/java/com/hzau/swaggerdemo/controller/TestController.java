@@ -2,8 +2,10 @@ package com.hzau.swaggerdemo.controller;
 
 import com.hzau.swaggerdemo.vo.CommonResult;
 import com.hzau.swaggerdemo.vo.MyUser;
+import com.hzau.swaggerdemo.vo.MyUserImg;
 import com.hzau.swaggerdemo.vo.ResultState;
 import io.swagger.annotations.*;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -34,16 +36,9 @@ public class TestController {
     }
 
 
-    @ApiOperation(value = "保存用户")
-    @PostMapping("save")
-    @ApiImplicitParams({
-            @ApiImplicitParam(name = "userName", value = "用户名", paramType = "form"),
-            @ApiImplicitParam(name = "email", value = "邮箱", paramType = "form"),
-            @ApiImplicitParam(name = "age", value = "年龄", paramType = "form"),
-            @ApiImplicitParam(name = "sex", value = "性别", paramType = "form"),
-            @ApiImplicitParam(name = "createTime", value = "创建日期", paramType = "form")
+    @ApiOperation(value = "普通form保存用户")
+    @PostMapping(value="save",consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
 
-    })
     public CommonResult<MyUser> save(MyUser myUser) {
         return new CommonResult<>(ResultState.SUCCESS, "操作成功", myUser);
     }
@@ -55,4 +50,10 @@ public class TestController {
         return new CommonResult<>(ResultState.SUCCESS, "操作成功", myUser);
     }
 
+
+    @ApiOperation(value = "multipart/form-data 提交表单")
+    @PostMapping(value = "saveFile",consumes = MediaType.MULTIPART_FORM_DATA_VALUE )
+    public CommonResult<MyUser> saveFile( MyUserImg myUserImg) {
+        return new CommonResult<>(ResultState.SUCCESS, "操作成功", null);
+    }
 }
